@@ -1,0 +1,34 @@
+models:
+  Chirp:
+    message: string:255
+    relationships:
+      belongsTo: User
+
+controllers:
+  Chirp:
+    index:
+      query: all
+      render: chirps.index
+
+    create:
+      render: chirps.create
+
+    store:
+      validate: message
+      save: chirp with:user
+      fire: NewChirp
+      redirect: chirps.index
+
+    show:
+      render: chirps.show
+
+    edit:
+      render: chirps.edit
+
+    update:
+      update: chirp
+      redirect: chirps.index
+
+    destroy:
+      delete: chirp
+      redirect: chirps.index
